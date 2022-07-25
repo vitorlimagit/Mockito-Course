@@ -7,10 +7,11 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
-public class TodoBusinessImplMockTest {
+public class TodoBusinessIm {
 
     @Test
     public void testeRetrieveTodosRelatedToSpring_usingAMock(){
@@ -20,7 +21,16 @@ public class TodoBusinessImplMockTest {
 
         List<String> todos = Arrays.asList("Learn Spring MVC","Learn Spring", "Learn to Dance");
 
-        when(todoServiceMock.retrieveTodos("Dummy")).thenReturn(todos);
+        given(todoServiceMock.retrieveTodos("Dummy")).willReturn(todos);
+
+        TodoBusinessImpl todoBusinessImpl = new TodoBusinessImpl(todoServiceMock);
+
+        //When
+        List<String> filteredTodos = todoBusinessImpl
+                .retrieveTodosRelatedToSpring("Dummy");
+
+        //Then
+//        assertThat(filteredTodos.size(), is(2));
 
     }
 
